@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
@@ -27,24 +28,33 @@
                 <Insets top="20" right="20" bottom="20" left="20" />
             </padding>
             <Label text="Inventory" styleClass="page-title" />
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <TextField fx:id="searchField" promptText="Search items" onKeyReleased="#onSearch" />
-                <ComboBox fx:id="filterCombo" onAction="#onSearch" />
-                <Button text="Search" onAction="#onSearch" styleClass="ghost-button" />
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <HBox spacing="8" alignment="CENTER_LEFT" styleClass="search-bar">
+                    <TextField fx:id="searchField" promptText="Search items" onKeyReleased="#onSearch" />
+                    <ComboBox fx:id="filterCombo" onAction="#onSearch" />
+                    <Button text="Search" onAction="#onSearch" styleClass="ghost-button" />
+                </HBox>
+                <Region HBox.hgrow="ALWAYS" />
                 <Button fx:id="addButton" text="Add Item" onAction="#onAdd" styleClass="primary-button" />
             </HBox>
             <HBox spacing="16">
-                <TableView fx:id="inventoryTable" prefHeight="420" prefWidth="700">
+                <TableView fx:id="inventoryTable" prefHeight="420" prefWidth="700" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+                    <placeholder>
+                        <Label text="No items found." styleClass="muted-text" />
+                    </placeholder>
                     <columns>
                         <TableColumn fx:id="nameColumn" text="Item" prefWidth="420" />
                         <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="140" />
                     </columns>
                 </TableView>
-                <VBox spacing="12" alignment="TOP_CENTER">
+                <VBox spacing="12" alignment="TOP_CENTER" styleClass="preview-card">
                     <Label text="Preview" styleClass="section-title" />
                     <ImageView fx:id="previewImageView" fitWidth="240" fitHeight="240" preserveRatio="true" />
-                    <Button fx:id="editButton" text="Edit" onAction="#onEdit" styleClass="ghost-button" />
-                    <Button fx:id="deleteButton" text="Delete" onAction="#onDelete" styleClass="danger-button" />
+                    <Label text="No item selected" styleClass="preview-placeholder" />
+                    <VBox spacing="8" alignment="CENTER" maxWidth="Infinity">
+                        <Button fx:id="editButton" text="Edit" onAction="#onEdit" styleClass="ghost-button" maxWidth="Infinity" />
+                        <Button fx:id="deleteButton" text="Delete" onAction="#onDelete" styleClass="danger-button" maxWidth="Infinity" />
+                    </VBox>
                 </VBox>
             </HBox>
         </VBox>

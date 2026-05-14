@@ -9,21 +9,32 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Priority?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
 
 <HBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
         fx:controller="com.ccissc.inventory.controller.NavbarController"
         alignment="CENTER_LEFT" spacing="12" styleClass="navbar">
     <padding>
-        <Insets top="10" right="16" bottom="10" left="16" />
+        <Insets top="12" right="16" bottom="12" left="16" />
     </padding>
-    <ImageView fitHeight="36" fitWidth="36" preserveRatio="true">
-        <image>
-            <Image url="/com/ccissc/inventory/images/ccis-sc-logo.png" />
-        </image>
-    </ImageView>
+    <StackPane>
+        <ImageView fitHeight="36" fitWidth="36" preserveRatio="true">
+            <image>
+                <Image url="/com/ccissc/inventory/images/ccis-sc-logo.png" />
+            </image>
+            <clip>
+                <Circle radius="18" centerX="18" centerY="18" />
+            </clip>
+        </ImageView>
+        <Circle radius="18" styleClass="logo-ring" />
+    </StackPane>
     <Label text="CCIS SC Inventory" styleClass="navbar-title" />
     <Region HBox.hgrow="ALWAYS" />
-    <Label text="User:" />
+    <StackPane>
+        <Circle radius="12" styleClass="avatar-circle" />
+        <Label text="U" styleClass="avatar-initials" />
+    </StackPane>
     <Label fx:id="userLabel" text="" styleClass="navbar-user" />
     <Button text="Logout" onAction="#onLogout" styleClass="ghost-button" />
 </HBox>

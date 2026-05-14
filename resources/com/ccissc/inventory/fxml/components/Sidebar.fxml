@@ -10,8 +10,8 @@
     <padding>
         <Insets top="16" right="12" bottom="16" left="12" />
     </padding>
-    <Button text="Dashboard" onAction="#onDashboard" styleClass="sidebar-button" />
-    <Button text="Inventory" onAction="#onInventory" styleClass="sidebar-button" />
-    <Button fx:id="userManagementButton" text="User Management" onAction="#onUserManagement"
+    <Button text="[D] Dashboard" onAction="#onDashboard" styleClass="sidebar-button" />
+    <Button text="[I] Inventory" onAction="#onInventory" styleClass="sidebar-button" />
+    <Button fx:id="userManagementButton" text="[U] User Management" onAction="#onUserManagement"
             styleClass="sidebar-button" />
 </VBox>

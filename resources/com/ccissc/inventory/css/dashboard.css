@@ -1,19 +1,51 @@
 .stat-card {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: -app-surface;
     -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: -app-border;
     -fx-padding: 16;
-    -fx-min-width: 200;
-    -fx-effect: dropshadow(gaussian, rgba(15, 107, 62, 0.12), 10, 0.2, 0, 3);
+    -fx-min-width: 160;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.08), 10, 0.2, 0, 3);
+}
+
+.stat-card:hover {
+    -fx-translate-y: -2;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.14), 14, 0.25, 0, 6);
+}
+
+.stat-accent {
+    -fx-min-height: 6;
+    -fx-background-radius: 6 6 0 0;
+}
+
+.stat-accent.green {
+    -fx-background-color: -app-accent;
+}
+
+.stat-accent.blue {
+    -fx-background-color: #3b82f6;
+}
+
+.stat-accent.amber {
+    -fx-background-color: #f59e0b;
 }
 
 .stat-title {
-    -fx-text-fill: #64748B;
+    -fx-text-fill: -app-muted;
     -fx-font-size: 12px;
-    -fx-text-transform: uppercase;
+    -fx-letter-spacing: 1.2;
 }
 
 .stat-value {
-    -fx-text-fill: #0F6B3E;
-    -fx-font-size: 22px;
+    -fx-text-fill: -app-primary;
+    -fx-font-size: 32px;
     -fx-font-weight: bold;
+}
+
+.quick-actions {
+    -fx-padding: 8 0 0 0;
+}
+
+.section-divider {
+    -fx-background-color: -app-border;
 }

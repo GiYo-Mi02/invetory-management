@@ -7,7 +7,9 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
@@ -26,27 +28,34 @@
             <Label text="Dashboard" styleClass="page-title" />
             <HBox spacing="12">
                 <VBox styleClass="stat-card" spacing="6">
+                    <Region styleClass="stat-accent green" />
                     <Label text="Total Items" styleClass="stat-title" />
                     <Label fx:id="totalItemsLabel" text="0" styleClass="stat-value" />
                 </VBox>
                 <VBox styleClass="stat-card" spacing="6">
+                    <Region styleClass="stat-accent blue" />
                     <Label text="Total Stock" styleClass="stat-title" />
                     <Label fx:id="totalStockLabel" text="0" styleClass="stat-value" />
                 </VBox>
                 <VBox styleClass="stat-card" spacing="6">
+                    <Region styleClass="stat-accent amber" />
                     <Label text="Low Stock" styleClass="stat-title" />
                     <Label fx:id="lowStockLabel" text="0" styleClass="stat-value" />
                 </VBox>
             </HBox>
 
-            <HBox alignment="CENTER_LEFT" spacing="12">
+            <VBox spacing="10" styleClass="quick-actions">
                 <Label text="Quick Actions" styleClass="section-title" />
                 <Button fx:id="manageUsersButton" text="Manage Users" onAction="#onManageUsers"
                         styleClass="primary-button" />
-            </HBox>
+                <Separator styleClass="section-divider" />
+            </VBox>
 
             <Label text="Recent Items" styleClass="section-title" />
-            <TableView fx:id="recentItemsTable" prefHeight="260">
+            <TableView fx:id="recentItemsTable" prefHeight="260" VBox.vgrow="ALWAYS">
+                <placeholder>
+                    <Label text="No recent items yet." styleClass="muted-text" />
+                </placeholder>
                 <columns>
                     <TableColumn fx:id="itemNameColumn" text="Item" prefWidth="320" />
                     <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="120" />

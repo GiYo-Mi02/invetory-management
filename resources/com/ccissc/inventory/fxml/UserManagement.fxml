@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
@@ -22,14 +23,21 @@
             <padding>
                 <Insets top="20" right="20" bottom="20" left="20" />
             </padding>
-            <Label text="User Management" styleClass="page-title" />
+            <VBox spacing="6">
+                <Label text="User Management" styleClass="page-title" />
+                <Label text="0 users" styleClass="muted-text" />
+            </VBox>
             <HBox spacing="10">
                 <Button text="Add User" onAction="#onAddUser" styleClass="primary-button" />
-                <Button text="Change Role" onAction="#onChangeRole" styleClass="ghost-button" />
-                <Button text="Toggle Active" onAction="#onToggleActive" styleClass="ghost-button" />
-                <Button text="Delete" onAction="#onDeleteUser" styleClass="danger-button" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button text="Change Role" onAction="#onChangeRole" styleClass="ghost-button" disable="true" />
+                <Button text="Toggle Active" onAction="#onToggleActive" styleClass="ghost-button" disable="true" />
+                <Button text="Delete" onAction="#onDeleteUser" styleClass="danger-button" disable="true" />
             </HBox>
-            <TableView fx:id="userTable" prefHeight="420">
+            <TableView fx:id="userTable" prefHeight="420" VBox.vgrow="ALWAYS">
+                <placeholder>
+                    <Label text="No users available." styleClass="muted-text" />
+                </placeholder>
                 <columns>
                     <TableColumn fx:id="usernameColumn" text="Username" prefWidth="200" />
                     <TableColumn fx:id="fullNameColumn" text="Full Name" prefWidth="260" />

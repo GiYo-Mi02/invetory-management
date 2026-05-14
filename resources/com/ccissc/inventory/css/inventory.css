@@ -1,5 +1,28 @@
 .inventory-toolbar {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: -app-surface;
     -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: -app-border;
     -fx-padding: 10;
+}
+
+.search-bar {
+    -fx-background-color: -app-surface;
+    -fx-border-color: -app-border;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 6;
+}
+
+.preview-card {
+    -fx-background-color: -app-surface;
+    -fx-border-color: -app-border;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.06), 8, 0.2, 0, 2);
+}
+
+.preview-placeholder {
+    -fx-text-fill: -app-muted;
 }

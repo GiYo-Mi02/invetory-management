@@ -1,7 +1,23 @@
 .dialog-pane {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: -app-surface;
 }
 
-.label {
-    -fx-text-fill: #0F6B3E;
+.modal-root {
+    -fx-background-color: -app-surface;
+}
+
+.form-label {
+    -fx-text-fill: -app-muted;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 1.1;
+}
+
+.upload-box {
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 8;
+    -fx-border-style: dashed;
+    -fx-border-width: 2;
+    -fx-background-radius: 8;
+    -fx-padding: 12;
 }

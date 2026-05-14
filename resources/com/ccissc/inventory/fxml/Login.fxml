@@ -9,33 +9,37 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
         fx:controller="com.ccissc.inventory.controller.LoginController" styleClass="login-root">
     <left>
-        <VBox alignment="CENTER" spacing="16" styleClass="login-brand" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" spacing="14" styleClass="login-brand" BorderPane.alignment="CENTER">
             <ImageView fitHeight="140" fitWidth="140" preserveRatio="true">
                 <image>
                     <Image url="/com/ccissc/inventory/images/ccis-sc-logo.png" />
                 </image>
             </ImageView>
+            <Label text="University of Makati" styleClass="brand-name" />
             <Label text="CCIS SC" styleClass="brand-title" />
-            <Label text="Inventory Management" styleClass="brand-subtitle" />
+            <Label text="Inventory Management System" styleClass="brand-subtitle" />
         </VBox>
     </left>
     <center>
-        <VBox alignment="CENTER" spacing="20" styleClass="login-form" BorderPane.alignment="CENTER">
-            <Label text="Welcome Back" styleClass="form-title" />
-            <VBox spacing="12" maxWidth="320">
-                <Label text="Username" />
-                <TextField fx:id="usernameField" promptText="Enter username" />
-                <Label text="Password" />
-                <PasswordField fx:id="passwordField" promptText="Enter password" />
+        <StackPane BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" spacing="20" styleClass="login-form" maxWidth="380">
+                <Label text="Welcome Back" styleClass="form-title" />
+                <VBox spacing="10" maxWidth="320">
+                    <Label text="Username" styleClass="form-label" />
+                    <TextField fx:id="usernameField" promptText="Enter username" />
+                    <Label text="Password" styleClass="form-label" />
+                    <PasswordField fx:id="passwordField" promptText="Enter password" />
+                    <Label text="" styleClass="error-text" managed="false" visible="false" />
+                </VBox>
+                <Button text="Login" onAction="#onLogin" styleClass="primary-button" maxWidth="320" />
             </VBox>
-            <Button text="Login" onAction="#onLogin" styleClass="primary-button" maxWidth="320" />
-        </VBox>
+        </StackPane>
     </center>
     <padding>
         <Insets top="20" right="20" bottom="20" left="20" />
