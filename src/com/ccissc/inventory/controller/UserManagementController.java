@@ -6,18 +6,26 @@ import com.ccissc.inventory.service.UserService;
 import com.ccissc.inventory.util.AlertUtil;
 import com.ccissc.inventory.util.NavigationUtil;
 import com.ccissc.inventory.util.SessionManager;
+import com.ccissc.inventory.util.ToastUtil;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 public class UserManagementController {
     @FXML
@@ -35,7 +43,29 @@ public class UserManagementController {
     @FXML
     private TableColumn<User, Boolean> activeColumn;
 
+    @FXML
+    private TableColumn<User, String> lastLoginColumn;
+
+    @FXML
+    private TableColumn<User, Integer> actionCountColumn;
+
+    @FXML
+    private Label userCountLabel;
+
+    @FXML
+    private Button changeRoleButton;
+
+    @FXML
+    private Button toggleActiveButton;
+
+    @FXML
+    private Button deleteUserButton;
+
+    @FXML
+    private Button resetPasswordButton;
+
     private final UserService userService = new UserService();
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm");
 
     @FXML
     private void initialize() {
@@ -48,6 +78,37 @@ public class UserManagementController {
         fullNameColumn.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
         activeColumn.setCellValueFactory(new PropertyValueFactory<>("active"));
+        activeColumn.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(Boolean active, boolean empty) {
+                super.updateItem(active, empty);
+                if (empty || active == null) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    FontIcon icon = new FontIcon(active ? "fas-circle-check" : "fas-circle-xmark");
+                    icon.setIconSize(16);
+                    icon.getStyleClass().add(active ? "icon-success" : "icon-danger");
+                    setGraphic(icon);
+                    setText(null);
+                    setAlignment(Pos.CENTER);
+                }
+            }
+        });
+        actionCountColumn.setCellValueFactory(new PropertyValueFactory<>("actionCount"));
+        lastLoginColumn.setCellValueFactory(param -> {
+            User user = param.getValue();
+            if (user.getLastLoginAt() == null) {
+                return new ReadOnlyStringWrapper("Never");
+            }
+            return new ReadOnlyStringWrapper(user.getLastLoginAt().format(DATE_FORMAT));
+        });
+
+        // Selection-driven button enable/disable
+        updateActionButtons(false);
+        userTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            updateActionButtons(newVal != null);
+        });
 
         refreshTable();
     }
@@ -59,6 +120,7 @@ public class UserManagementController {
             try {
                 userService.createUser(user.getUsername(), user.getPasswordHash(), user.getFullName(), user.getRole());
                 refreshTable();
+                ToastUtil.show(userTable.getScene(), "User created ✓");
             } catch (Exception ex) {
                 AlertUtil.showError("Create Error", "Unable to create user.");
             }
@@ -74,8 +136,14 @@ public class UserManagementController {
         }
 
         Role newRole = selected.getRole() == Role.EXECUTIVE ? Role.COMMITTEE : Role.EXECUTIVE;
+        boolean confirmed = AlertUtil.showConfirm("Change Role",
+                "Change " + selected.getFullName() + "'s role to " + newRole + "?");
+        if (!confirmed) {
+            return;
+        }
         userService.updateRole(selected.getId(), newRole);
         refreshTable();
+        ToastUtil.show(userTable.getScene(), "Role updated to " + newRole + " ✓");
     }
 
     @FXML
@@ -86,8 +154,15 @@ public class UserManagementController {
             return;
         }
 
+        String action = selected.isActive() ? "deactivate" : "activate";
+        boolean confirmed = AlertUtil.showConfirm("Toggle Active",
+                "Are you sure you want to " + action + " " + selected.getFullName() + "?");
+        if (!confirmed) {
+            return;
+        }
         userService.setActive(selected.getId(), !selected.isActive());
         refreshTable();
+        ToastUtil.show(userTable.getScene(), "User " + action + "d ✓");
     }
 
     @FXML
@@ -98,16 +173,53 @@ public class UserManagementController {
             return;
         }
 
-        boolean confirmed = AlertUtil.showConfirm("Delete User", "Are you sure you want to delete this user?");
+        boolean confirmed = AlertUtil.showConfirm("Delete User",
+                "Are you sure you want to delete " + selected.getFullName() + "? This cannot be undone.");
         if (confirmed) {
             userService.deleteUser(selected.getId());
             refreshTable();
+            ToastUtil.show(userTable.getScene(), "User deleted ✓");
         }
+    }
+
+    @FXML
+    private void onResetPassword() {
+        User selected = userTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            AlertUtil.showError("No Selection", "Select a user to reset password.");
+            return;
+        }
+
+        boolean confirmed = AlertUtil.showConfirm("Reset Password",
+                "Reset password for " + selected.getFullName() + "? A temporary password will be generated.");
+        if (!confirmed) {
+            return;
+        }
+
+        // Generate random 8-char temp password
+        String tempPassword = UUID.randomUUID().toString().substring(0, 8);
+        try {
+            userService.resetPassword(selected.getId(), tempPassword);
+            AlertUtil.showInfo("Password Reset",
+                    "Temporary password for " + selected.getUsername() + ":\n\n" + tempPassword
+                            + "\n\nPlease share this with the user securely.");
+            ToastUtil.show(userTable.getScene(), "Password reset ✓");
+        } catch (Exception ex) {
+            AlertUtil.showError("Reset Error", "Unable to reset password.");
+        }
+    }
+
+    private void updateActionButtons(boolean hasSelection) {
+        changeRoleButton.setDisable(!hasSelection);
+        toggleActiveButton.setDisable(!hasSelection);
+        deleteUserButton.setDisable(!hasSelection);
+        resetPasswordButton.setDisable(!hasSelection);
     }
 
     private void refreshTable() {
         List<User> users = userService.getAllUsers();
         userTable.setItems(FXCollections.observableArrayList(users));
+        userCountLabel.setText(users.size() + " user" + (users.size() != 1 ? "s" : ""));
     }
 
     private Dialog<User> buildUserDialog() {

@@ -25,6 +25,9 @@ public class MainApp extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(LOGIN_FXML));
         Scene scene = new Scene(loader.load(), 1100, 700);
         NavigationUtil.applyGlobalStyles(scene);
+        if (NavigationUtil.isDarkMode()) {
+            NavigationUtil.applyDarkStylesheet(scene, true);
+        }
 
         primaryStage.setTitle(APP_TITLE);
         Image icon = loadIcon();

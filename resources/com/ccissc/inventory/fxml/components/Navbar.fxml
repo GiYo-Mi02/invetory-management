@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Circle?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <HBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
         fx:controller="com.ccissc.inventory.controller.NavbarController"
@@ -18,8 +19,8 @@
     <padding>
         <Insets top="12" right="16" bottom="12" left="16" />
     </padding>
-    <StackPane>
-        <ImageView fitHeight="36" fitWidth="36" preserveRatio="true">
+    <StackPane fx:id="logoContainer">
+        <ImageView fx:id="logoImage" fitHeight="36" fitWidth="36" preserveRatio="true">
             <image>
                 <Image url="/com/ccissc/inventory/images/ccis-sc-logo.png" />
             </image>
@@ -28,13 +29,18 @@
             </clip>
         </ImageView>
         <Circle radius="18" styleClass="logo-ring" />
+        <!-- Fallback icon if logo image fails to load -->
+        <FontIcon fx:id="logoFallbackIcon" iconLiteral="fas-store" iconSize="20" styleClass="icon-primary"
+                  visible="false" managed="false" />
     </StackPane>
     <Label text="CCIS SC Inventory" styleClass="navbar-title" />
     <Region HBox.hgrow="ALWAYS" />
-    <StackPane>
-        <Circle radius="12" styleClass="avatar-circle" />
-        <Label text="U" styleClass="avatar-initials" />
-    </StackPane>
+    <Button fx:id="themeToggleButton" onAction="#onToggleTheme" styleClass="ghost-button">
+        <graphic><FontIcon fx:id="themeIcon" iconLiteral="fas-moon" iconSize="14" /></graphic>
+    </Button>
+    <FontIcon iconLiteral="fas-circle-user" iconSize="24" styleClass="icon-primary" />
     <Label fx:id="userLabel" text="" styleClass="navbar-user" />
-    <Button text="Logout" onAction="#onLogout" styleClass="ghost-button" />
+    <Button text="Logout" onAction="#onLogout" styleClass="ghost-button">
+        <graphic><FontIcon iconLiteral="fas-right-from-bracket" iconSize="14" /></graphic>
+    </Button>
 </HBox>

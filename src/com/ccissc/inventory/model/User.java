@@ -11,12 +11,14 @@ public class User {
     private boolean active;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime lastLoginAt;
+    private int actionCount;
 
     public User() {
     }
 
     public User(int id, String username, String passwordHash, String fullName, Role role, boolean active,
-            LocalDateTime createdAt, LocalDateTime updatedAt) {
+            LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime lastLoginAt, int actionCount) {
         this.id = id;
         this.username = username;
         this.passwordHash = passwordHash;
@@ -25,6 +27,8 @@ public class User {
         this.active = active;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.lastLoginAt = lastLoginAt;
+        this.actionCount = actionCount;
     }
 
     public int getId() {
@@ -89,5 +93,21 @@ public class User {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getLastLoginAt() {
+        return lastLoginAt;
+    }
+
+    public void setLastLoginAt(LocalDateTime lastLoginAt) {
+        this.lastLoginAt = lastLoginAt;
+    }
+
+    public int getActionCount() {
+        return actionCount;
+    }
+
+    public void setActionCount(int actionCount) {
+        this.actionCount = actionCount;
     }
 }

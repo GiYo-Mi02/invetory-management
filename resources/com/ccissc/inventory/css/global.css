@@ -160,3 +160,32 @@
 .table-row-cell:odd {
     -fx-background-color: #f8fafc;
 }
+
+/* --- Icon utility classes --- */
+.icon-primary { -fx-icon-color: -app-primary; }
+.icon-accent  { -fx-icon-color: -app-accent; }
+.icon-success { -fx-icon-color: #16a34a; }
+.icon-danger  { -fx-icon-color: -app-danger; }
+.icon-warning { -fx-icon-color: #f59e0b; }
+.icon-info    { -fx-icon-color: #3b82f6; }
+.icon-muted   { -fx-icon-color: -app-muted; }
+.icon-white   { -fx-icon-color: #ffffff; }
+.icon-surface { -fx-icon-color: -app-surface; }
+
+.primary-button .ikonli-font-icon { -fx-icon-color: -app-surface; }
+.ghost-button .ikonli-font-icon   { -fx-icon-color: -app-primary; }
+.ghost-button:hover .ikonli-font-icon { -fx-icon-color: -app-surface; }
+.danger-button .ikonli-font-icon  { -fx-icon-color: -app-surface; }
+.sidebar-button .ikonli-font-icon { -fx-icon-color: -app-muted; }
+.sidebar-button:hover .ikonli-font-icon { -fx-icon-color: -app-primary; }
+.sidebar-button.active .ikonli-font-icon { -fx-icon-color: -app-surface; }
+
+/* --- Dialog icon styling --- */
+.dialog-pane .graphic-container .ikonli-font-icon {
+    -fx-icon-size: 28;
+}
+
+/* --- Toast container --- */
+.toast .ikonli-font-icon {
+    -fx-icon-size: 16;
+}

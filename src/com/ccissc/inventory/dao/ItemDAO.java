@@ -7,21 +7,29 @@ import java.util.Optional;
 public interface ItemDAO {
     Optional<Item> findById(int id);
 
-    List<Item> findAll();
+    Optional<Item> findByName(String name, boolean includeArchived);
 
-    List<Item> search(String query);
+    List<Item> findAll(boolean includeArchived);
+
+    List<Item> search(String query, Integer categoryId, boolean includeArchived);
 
     int create(Item item);
 
     boolean update(Item item);
 
-    boolean delete(int itemId);
+    boolean updateQuantity(int itemId, int newQuantity);
+
+    boolean setArchived(int itemId, boolean archived);
 
     int getTotalItems();
 
     int getTotalStock();
 
-    int getLowStockCount(int threshold);
+    int getLowStockCount();
+
+    List<Item> getLowStockItems(int limit);
+
+    List<Item> getTopItems(int limit);
 
     List<Item> getRecentItems(int limit);
 }

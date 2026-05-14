@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
         fx:controller="com.ccissc.inventory.controller.UserManagementController">
@@ -25,24 +26,40 @@
             </padding>
             <VBox spacing="6">
                 <Label text="User Management" styleClass="page-title" />
-                <Label text="0 users" styleClass="muted-text" />
+                <Label fx:id="userCountLabel" text="0 users" styleClass="muted-text" />
             </VBox>
             <HBox spacing="10">
-                <Button text="Add User" onAction="#onAddUser" styleClass="primary-button" />
+                <Button text="Add User" onAction="#onAddUser" styleClass="primary-button">
+                    <graphic><FontIcon iconLiteral="fas-user-plus" iconSize="14" /></graphic>
+                </Button>
                 <Region HBox.hgrow="ALWAYS" />
-                <Button text="Change Role" onAction="#onChangeRole" styleClass="ghost-button" disable="true" />
-                <Button text="Toggle Active" onAction="#onToggleActive" styleClass="ghost-button" disable="true" />
-                <Button text="Delete" onAction="#onDeleteUser" styleClass="danger-button" disable="true" />
+                <Button fx:id="resetPasswordButton" text="Reset Password" onAction="#onResetPassword" styleClass="ghost-button">
+                    <graphic><FontIcon iconLiteral="fas-key" iconSize="14" /></graphic>
+                </Button>
+                <Button fx:id="changeRoleButton" text="Change Role" onAction="#onChangeRole" styleClass="ghost-button">
+                    <graphic><FontIcon iconLiteral="fas-user-pen" iconSize="14" /></graphic>
+                </Button>
+                <Button fx:id="toggleActiveButton" text="Toggle Active" onAction="#onToggleActive" styleClass="ghost-button">
+                    <graphic><FontIcon iconLiteral="fas-toggle-on" iconSize="14" /></graphic>
+                </Button>
+                <Button fx:id="deleteUserButton" text="Delete" onAction="#onDeleteUser" styleClass="danger-button">
+                    <graphic><FontIcon iconLiteral="fas-user-minus" iconSize="14" /></graphic>
+                </Button>
             </HBox>
             <TableView fx:id="userTable" prefHeight="420" VBox.vgrow="ALWAYS">
                 <placeholder>
-                    <Label text="No users available." styleClass="muted-text" />
+                    <VBox spacing="8" alignment="CENTER">
+                        <FontIcon iconLiteral="fas-users" iconSize="48" styleClass="icon-muted" />
+                        <Label text="No users available." styleClass="muted-text" />
+                    </VBox>
                 </placeholder>
                 <columns>
-                    <TableColumn fx:id="usernameColumn" text="Username" prefWidth="200" />
-                    <TableColumn fx:id="fullNameColumn" text="Full Name" prefWidth="260" />
-                    <TableColumn fx:id="roleColumn" text="Role" prefWidth="140" />
-                    <TableColumn fx:id="activeColumn" text="Active" prefWidth="120" />
+                    <TableColumn fx:id="usernameColumn" text="Username" prefWidth="160" sortable="true" />
+                    <TableColumn fx:id="fullNameColumn" text="Full Name" prefWidth="200" sortable="true" />
+                    <TableColumn fx:id="roleColumn" text="Role" prefWidth="120" sortable="true" />
+                    <TableColumn fx:id="activeColumn" text="Active" prefWidth="80" sortable="true" />
+                    <TableColumn fx:id="lastLoginColumn" text="Last Login" prefWidth="160" sortable="true" />
+                    <TableColumn fx:id="actionCountColumn" text="Actions" prefWidth="80" sortable="true" />
                 </columns>
             </TableView>
         </VBox>

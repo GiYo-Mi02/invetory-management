@@ -51,4 +51,11 @@ public class UserService {
         ValidationUtil.requireNonNegative(userId, "User id is required");
         return userDao.delete(userId);
     }
+
+    public boolean resetPassword(int userId, String newPassword) {
+        ValidationUtil.requireNonNegative(userId, "User id is required");
+        ValidationUtil.requireNotBlank(newPassword, "New password is required");
+        String hash = BCrypt.hashpw(newPassword, BCrypt.gensalt(10));
+        return userDao.updatePassword(userId, hash);
+    }
 }

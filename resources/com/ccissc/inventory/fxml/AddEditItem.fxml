@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -9,6 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <VBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="com.ccissc.inventory.controller.AddEditItemController" spacing="16"
@@ -16,26 +18,40 @@
     <padding>
         <Insets top="20" right="20" bottom="20" left="20" />
     </padding>
-    <Label text="Item Details" styleClass="page-title" />
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <FontIcon fx:id="dialogIcon" iconLiteral="fas-circle-plus" iconSize="22" styleClass="icon-primary" />
+        <Label text="Item Details" styleClass="page-title" />
+    </HBox>
     <GridPane hgap="16" vgap="12">
         <Label text="Name" styleClass="form-label" GridPane.rowIndex="0" GridPane.columnIndex="0" />
         <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1" />
-        <Label text="Quantity" styleClass="form-label" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-        <TextField fx:id="quantityField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
-        <Label text="Description" styleClass="form-label" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-        <TextArea fx:id="descriptionArea" prefRowCount="4" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+        <Label text="Category" styleClass="form-label" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+        <ComboBox fx:id="categoryCombo" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+        <Label text="Quantity" styleClass="form-label" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+        <TextField fx:id="quantityField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+        <Label text="Min Quantity" styleClass="form-label" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+        <TextField fx:id="minQuantityField" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+        <Label text="Description" styleClass="form-label" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+        <TextArea fx:id="descriptionArea" prefRowCount="4" GridPane.rowIndex="4" GridPane.columnIndex="1" />
     </GridPane>
 
     <HBox spacing="16" alignment="CENTER_LEFT">
         <ImageView fx:id="itemImageView" fitWidth="120" fitHeight="120" preserveRatio="true" />
-        <VBox spacing="8" alignment="CENTER_LEFT" styleClass="upload-box" minHeight="120" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+        <VBox fx:id="uploadBox" spacing="8" alignment="CENTER" styleClass="upload-box" minHeight="120" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+            <FontIcon iconLiteral="fas-image" iconSize="28" styleClass="icon-muted" />
             <Label fx:id="imagePathLabel" text="No image selected" styleClass="muted-text" />
-            <Button text="Choose Image" onAction="#onChooseImage" styleClass="ghost-button" />
+            <Button text="Choose Image" onAction="#onChooseImage" styleClass="ghost-button">
+                <graphic><FontIcon iconLiteral="fas-upload" iconSize="14" /></graphic>
+            </Button>
         </VBox>
     </HBox>
 
     <HBox spacing="8" alignment="CENTER_RIGHT">
-        <Button text="Cancel" onAction="#onCancel" styleClass="ghost-button" />
-        <Button text="Save" onAction="#onSave" styleClass="primary-button" />
+        <Button text="Cancel" onAction="#onCancel" styleClass="ghost-button">
+            <graphic><FontIcon iconLiteral="fas-xmark" iconSize="14" /></graphic>
+        </Button>
+        <Button text="Save" onAction="#onSave" styleClass="primary-button">
+            <graphic><FontIcon iconLiteral="fas-floppy-disk" iconSize="14" /></graphic>
+        </Button>
     </HBox>
 </VBox>

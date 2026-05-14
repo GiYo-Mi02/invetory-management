@@ -15,7 +15,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserDAOImpl implements UserDAO {
-    private static final String BASE_SELECT = "SELECT id, username, password_hash, full_name, role, is_active, created_at, updated_at FROM users";
+    private static final String BASE_SELECT = "SELECT u.id, u.username, u.password_hash, u.full_name, u.role, u.is_active, "
+            + "u.created_at, u.updated_at, "
+            + "(SELECT MAX(logged_in_at) FROM login_history WHERE user_id = u.id) AS last_login, "
+            + "(SELECT COUNT(*) FROM user_activity WHERE user_id = u.id) AS action_count "
+            + "FROM users u";
 
     @Override
     public Optional<User> findById(int id) {
@@ -146,6 +150,7 @@ public class UserDAOImpl implements UserDAO {
     private User mapUser(ResultSet rs) throws SQLException {
         Timestamp createdAt = rs.getTimestamp("created_at");
         Timestamp updatedAt = rs.getTimestamp("updated_at");
+        Timestamp lastLogin = rs.getTimestamp("last_login");
         return new User(
                 rs.getInt("id"),
                 rs.getString("username"),
@@ -154,6 +159,8 @@ public class UserDAOImpl implements UserDAO {
                 Role.valueOf(rs.getString("role")),
                 rs.getBoolean("is_active"),
                 createdAt != null ? createdAt.toLocalDateTime() : null,
-                updatedAt != null ? updatedAt.toLocalDateTime() : null);
+            updatedAt != null ? updatedAt.toLocalDateTime() : null,
+            lastLogin != null ? lastLogin.toLocalDateTime() : null,
+            rs.getInt("action_count"));
     }
 }
