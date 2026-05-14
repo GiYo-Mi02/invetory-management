@@ -29,6 +29,7 @@ public class LoginController {
         } catch (IllegalArgumentException ex) {
             AlertUtil.showError("Validation Error", ex.getMessage());
         } catch (Exception ex) {
+            ex.printStackTrace();
             AlertUtil.showError("Login Error", "Unable to log in. Please try again.");
         }
     }

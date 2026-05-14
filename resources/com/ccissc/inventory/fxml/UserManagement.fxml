@@ -18,7 +18,10 @@
         <fx:include source="components/Sidebar.fxml" />
     </left>
     <center>
-        <VBox spacing="16" padding="20">
+        <VBox spacing="16">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20" />
+            </padding>
             <Label text="User Management" styleClass="page-title" />
             <HBox spacing="10">
                 <Button text="Add User" onAction="#onAddUser" styleClass="primary-button" />
