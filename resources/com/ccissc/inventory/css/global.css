@@ -1,0 +1,83 @@
+@import url("login.css");
+@import url("dashboard.css");
+@import url("inventory.css");
+@import url("modal.css");
+
+.root {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #F5F7F6;
+}
+
+.page-title {
+    -fx-font-size: 24px;
+    -fx-text-fill: #0F6B3E;
+    -fx-font-weight: bold;
+}
+
+.section-title {
+    -fx-font-size: 16px;
+    -fx-text-fill: #0F6B3E;
+    -fx-font-weight: bold;
+}
+
+.primary-button {
+    -fx-background-color: #0F6B3E;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16;
+    -fx-background-radius: 6;
+}
+
+.ghost-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #0F6B3E;
+    -fx-text-fill: #0F6B3E;
+    -fx-border-radius: 6;
+    -fx-padding: 8 16;
+}
+
+.danger-button {
+    -fx-background-color: #DC2626;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16;
+    -fx-background-radius: 6;
+}
+
+.navbar {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E2E8F0;
+    -fx-border-width: 0 0 1 0;
+}
+
+.navbar-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.navbar-user {
+    -fx-text-fill: #0F6B3E;
+    -fx-font-weight: bold;
+}
+
+.sidebar {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E2E8F0;
+    -fx-border-width: 0 1 0 0;
+    -fx-min-width: 180;
+}
+
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #0F6B3E;
+    -fx-font-weight: bold;
+    -fx-padding: 10 12;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-view {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}

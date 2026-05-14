@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.ccissc.inventory.controller.SidebarController"
+        spacing="8" styleClass="sidebar">
+    <padding>
+        <Insets top="16" right="12" bottom="16" left="12" />
+    </padding>
+    <Button text="Dashboard" onAction="#onDashboard" styleClass="sidebar-button" />
+    <Button text="Inventory" onAction="#onInventory" styleClass="sidebar-button" />
+    <Button fx:id="userManagementButton" text="User Management" onAction="#onUserManagement"
+            styleClass="sidebar-button" />
+</VBox>

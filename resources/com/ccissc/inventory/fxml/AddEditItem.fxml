@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.ccissc.inventory.controller.AddEditItemController" spacing="16" padding="20">
+    <Label text="Item Details" styleClass="page-title" />
+    <GridPane hgap="12" vgap="12">
+        <Label text="Name" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+        <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+        <Label text="Quantity" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+        <TextField fx:id="quantityField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+        <Label text="Description" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+        <TextArea fx:id="descriptionArea" prefRowCount="4" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+    </GridPane>
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <ImageView fx:id="itemImageView" fitWidth="120" fitHeight="120" preserveRatio="true" />
+        <VBox spacing="6">
+            <Label fx:id="imagePathLabel" text="No image selected" />
+            <Button text="Choose Image" onAction="#onChooseImage" styleClass="ghost-button" />
+        </VBox>
+    </HBox>
+
+    <HBox spacing="12" alignment="CENTER_RIGHT">
+        <Button text="Cancel" onAction="#onCancel" styleClass="ghost-button" />
+        <Button text="Save" onAction="#onSave" styleClass="primary-button" />
+    </HBox>
+</VBox>

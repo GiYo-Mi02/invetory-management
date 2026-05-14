@@ -1,0 +1,33 @@
+.login-root {
+    -fx-background-color: linear-gradient(to bottom right, #F5F7F6, #FFFFFF);
+}
+
+.login-brand {
+    -fx-background-color: #0F6B3E;
+    -fx-background-radius: 12;
+    -fx-padding: 30;
+}
+
+.brand-title {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.brand-subtitle {
+    -fx-text-fill: #F4C430;
+    -fx-font-size: 16px;
+}
+
+.login-form {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12;
+    -fx-padding: 30;
+    -fx-effect: dropshadow(gaussian, rgba(15, 107, 62, 0.15), 10, 0.2, 0, 4);
+}
+
+.form-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0F6B3E;
+}
